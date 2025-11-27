@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/skydive_forecast_analysis_db
+    url: jdbc:postgresql://postgres-analysis:5432/skydive_forecast_analysis_db
     username: skydive_forecast_analysis
     password: pass
     driver-class-name: org.postgresql.Driver

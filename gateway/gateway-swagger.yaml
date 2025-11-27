@@ -3,11 +3,11 @@ springdoc:
     enabled: true
     path: /swagger-ui.html
     urls:
-      - name: User Service
+      - name: Users
         url: /v3/api-docs/users
-      - name: Analysis Service
+      - name: Analyses  
         url: /v3/api-docs/analyses
-      - name: Location Service
+      - name: Locations
         url: /v3/api-docs/locations
   api-docs:
     enabled: false

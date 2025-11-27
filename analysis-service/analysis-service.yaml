@@ -5,7 +5,7 @@ spring:
   profiles:
     active: dev
   application:
-    name: skydive-forecast-analysis-service
+    name: analysis-service
   jpa:
     properties:
       hibernate:
@@ -38,7 +38,7 @@ spring:
       observation-enabled: true
   data:
     redis:
-      host: localhost
+      host: redis
       port: 6379
       password: pass
       database: 0

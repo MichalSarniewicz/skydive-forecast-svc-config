@@ -2,21 +2,21 @@ server:
   port: 8083
 
 spring:
-  profiles:
-    active: dev
   application:
-    name: skydive-forecast-location-service
+    name: location-service
   jpa:
     properties:
       hibernate:
         format_sql: true
   liquibase:
+    enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml
-    database-change-log-table: skydive-forecast-location.DATABASECHANGELOG
-    database-change-log-lock-table: skydive-forecast-location.DATABASECHANGELOGLOCK
+    default-schema: skydive_forecast_location
+    database-change-log-table: skydive_forecast_location.DATABASECHANGELOG
+    database-change-log-lock-table: skydive_forecast_location.DATABASECHANGELOGLOCK
   data:
     redis:
-      host: localhost
+      host: redis
       port: 6379
       password: pass
       database: 0

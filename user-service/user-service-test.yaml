@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/skydive_forecast_user_db
+    url: jdbc:postgresql://postgres-user:5432/skydive_forecast_user_db
     username: skydive_forecast_user
     password: pass
     driver-class-name: org.postgresql.Driver
@@ -14,6 +14,10 @@ spring:
   liquibase:
     enabled: true
     default-schema: skydive_forecast_user
+
+logging:
+  level:
+    root: INFO
 
 jwt:
   secret: hK8nX2mP9qR5vT3wL7bE4jY6cA1dF8sZ

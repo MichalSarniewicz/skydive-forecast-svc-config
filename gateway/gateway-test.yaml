@@ -5,32 +5,14 @@ spring:
         webflux:
           routes:
             - id: users
-              uri: ${USER_SERVICE_URL}
+              uri: ${USER_SERVICE_URL:http://localhost:8081}
               predicates:
                 - Path=/api/v1/users/**
-              filters:
-                - StripPrefix=3
             - id: analyses
-              uri: ${ANALYSIS_SERVICE_URL}
+              uri: ${ANALYSIS_SERVICE_URL:http://localhost:8082}
               predicates:
                 - Path=/api/v1/analyses/**
-              filters:
-                - StripPrefix=3
             - id: locations
-              uri: ${LOCATION_SERVICE_URL}
+              uri: ${LOCATION_SERVICE_URL:http://localhost:8083}
               predicates:
                 - Path=/api/v1/locations/**
-              filters:
-                - StripPrefix=3
-            - id: users-swagger
-              uri: ${USER_SERVICE_URL}
-              predicates:
-                - Path=/v3/api-docs/users
-            - id: analyses-swagger
-              uri: ${ANALYSIS_SERVICE_URL}
-              predicates:
-                - Path=/v3/api-docs/analyses
-            - id: locations-swagger
-              uri: ${LOCATION_SERVICE_URL}
-              predicates:
-                - Path=/v3/api-docs/locations
