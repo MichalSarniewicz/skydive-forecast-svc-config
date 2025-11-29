@@ -14,6 +14,8 @@ spring:
   liquibase:
     enabled: true
     default-schema: skydive_forecast_analysis
+  kafka:
+    bootstrap-servers: kafka:9092
   ai:
     openai:
       api-key: ${OPENAI_API_KEY:no-key}
@@ -29,3 +31,7 @@ logging:
 
 jwt:
   secret: hK8nX2mP9qR5vT3wL7bE4jY6cA1dF8sZ
+
+location:
+  service:
+    url: http://location-service:8083

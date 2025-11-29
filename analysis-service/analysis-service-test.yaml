@@ -29,3 +29,7 @@ logging:
 
 jwt:
   secret: hK8nX2mP9qR5vT3wL7bE4jY6cA1dF8sZ
+
+location:
+  service:
+    url: http://location-service:8083
