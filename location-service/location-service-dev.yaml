@@ -12,7 +12,7 @@ spring:
         default_schema: skydive_forecast_location
     show-sql: true
   liquibase:
-    enabled: true
+    enabled: false
     default-schema: skydive_forecast_location
 
 logging:
