@@ -1,0 +1,36 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: users
+              uri: lb://user-service
+              predicates:
+                - Path=/api/v1/users/**
+              filters:
+                - StripPrefix=3
+            - id: analyses
+              uri: lb://analysis-service
+              predicates:
+                - Path=/api/v1/analyses/**
+              filters:
+                - StripPrefix=3
+            - id: locations
+              uri: lb://location-service
+              predicates:
+                - Path=/api/v1/locations/**
+              filters:
+                - StripPrefix=3
+            - id: users-swagger
+              uri: lb://user-service
+              predicates:
+                - Path=/v3/api-docs/users
+            - id: analyses-swagger
+              uri: lb://analysis-service
+              predicates:
+                - Path=/v3/api-docs/analyses
+            - id: locations-swagger
+              uri: lb://location-service
+              predicates:
+                - Path=/v3/api-docs/locations

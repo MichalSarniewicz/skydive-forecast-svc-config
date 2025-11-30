@@ -1,0 +1,92 @@
+server:
+  port: 8082
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: skydive-forecast-analysis-service
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    default-schema: skydive-forecast-analysis
+    database-change-log-table: DATABASECHANGELOG
+    database-change-log-lock-table: DATABASECHANGELOGLOCK
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: weather-report-group
+      auto-offset-reset: earliest
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+        spring.json.use.type.headers: false
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.value.default.type: com.skydiveforecast.infrastructure.adapter.in.web.dto.WeatherReportKafkaDto
+    template:
+      default-topic: weather-report-requests
+      observation-enabled: true
+    listener:
+      observation-enabled: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: pass
+      database: 0
+      timeout: 2000ms
+  cache:
+    type: redis
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs/analyses
+  swagger-ui:
+    path: /swagger-ui.html
+    url: /v3/api-docs/analyses.yaml
+
+jwt:
+  secret: change-me-please-and-make-it-at-least-32-characters-long
+
+resilience4j.circuitbreaker:
+  instances:
+    myService:
+      slidingWindowSize: 10
+      failureRateThreshold: 50
+      waitDurationInOpenState: 100
+
+location:
+  service:
+    url: http://localhost:8083
+    connection-timeout: 5000
+    read-timeout: 5000

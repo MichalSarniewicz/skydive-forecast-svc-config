@@ -1,0 +1,19 @@
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Sensitive data (if any secrets accidentally added)
+*-secret.yaml
+*-secrets.yaml
+*.key
+*.pem
