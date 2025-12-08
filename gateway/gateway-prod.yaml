@@ -8,11 +8,32 @@ spring:
               uri: ${USER_SERVICE_URL:http://localhost:8081}
               predicates:
                 - Path=/api/v1/users/**
+              filters:
+                - name: RequestRateLimiter
+                  args:
+                    redis-rate-limiter.replenishRate: 10
+                    redis-rate-limiter.burstCapacity: 20
+                    redis-rate-limiter.requestedTokens: 1
+                    key-resolver: "#{@ipKeyResolver}"
             - id: analyses
               uri: ${ANALYSIS_SERVICE_URL:http://localhost:8082}
               predicates:
                 - Path=/api/v1/analyses/**
+              filters:
+                - name: RequestRateLimiter
+                  args:
+                    redis-rate-limiter.replenishRate: 10
+                    redis-rate-limiter.burstCapacity: 20
+                    redis-rate-limiter.requestedTokens: 1
+                    key-resolver: "#{@ipKeyResolver}"
             - id: locations
               uri: ${LOCATION_SERVICE_URL:http://localhost:8083}
               predicates:
                 - Path=/api/v1/locations/**
+              filters:
+                - name: RequestRateLimiter
+                  args:
+                    redis-rate-limiter.replenishRate: 10
+                    redis-rate-limiter.burstCapacity: 20
+                    redis-rate-limiter.requestedTokens: 1
+                    key-resolver: "#{@ipKeyResolver}"

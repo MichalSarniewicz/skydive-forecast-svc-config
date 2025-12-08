@@ -12,8 +12,20 @@ Thumbs.db
 *.swp
 *~
 
-# Sensitive data (if any secrets accidentally added)
+# Logs
+*.log
+
+# Local configs (should use env vars instead)
+*-local.yaml
+*-local.yml
+*-local.properties
+
+# Sensitive data
 *-secret.yaml
 *-secrets.yaml
 *.key
 *.pem
+*.p12
+*.jks
+*.pfx
+*.env
