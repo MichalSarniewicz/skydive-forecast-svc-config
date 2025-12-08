@@ -35,3 +35,16 @@ jwt:
 location:
   service:
     url: http://location-service:8083
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      getHourlyForecast:
+        slidingWindowSize: 5
+        waitDurationInOpenState: 5000
+        permittedNumberOfCallsInHalfOpenState: 2
+        minimumNumberOfCalls: 3
+  retry:
+    instances:
+      getHourlyForecast:
+        waitDuration: 500
