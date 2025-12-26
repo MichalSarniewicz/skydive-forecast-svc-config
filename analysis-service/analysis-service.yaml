@@ -57,6 +57,11 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+        weather.report.processing.time: true
+        weather.ai.analysis.time: true
   prometheus:
     metrics:
       export:
